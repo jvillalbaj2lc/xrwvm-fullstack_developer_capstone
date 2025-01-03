@@ -1,4 +1,4 @@
 [flake8]
-max-line-length = 88
-exclude = .git,__pycache__,venv
+max-line-length = 88  # Increase max line length if needed
+exclude = .git,__pycache__,venv,migrations  # Add 'migrations' to excluded directories
 ignore = E203, W503

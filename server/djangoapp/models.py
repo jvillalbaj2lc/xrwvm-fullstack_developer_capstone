@@ -1,4 +1,3 @@
-# Uncomment the following imports before adding the Model code
 from django.db import models
 from django.utils.timezone import now
 from django.core.validators import MaxValueValidator, MinValueValidator
@@ -8,10 +7,14 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 class CarMake(models.Model):
     name = models.CharField(max_length=100)  # Name of the car make
     description = models.TextField()  # Description of the car make
-    country = models.CharField(max_length=100, blank=True, null=True)  # Optional: Country of origin
+    country = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True
+    )  # Optional: Country of origin
     founded_year = models.IntegerField(
         validators=[
-            MinValueValidator(1800),  # Assume car companies started around the 1800s
+            MinValueValidator(1800),  # Car companies started around the 1800s
             MaxValueValidator(now().year)
         ],
         blank=True,
@@ -24,8 +27,14 @@ class CarMake(models.Model):
 
 # CarModel Model
 class CarModel(models.Model):
-    car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)  # Many-to-One relationship
-    dealer_id = models.IntegerField(blank=True, null=True)  # Make dealer_id optional
+    car_make = models.ForeignKey(
+        CarMake,
+        on_delete=models.CASCADE
+    )  # Many-to-One relationship
+    dealer_id = models.IntegerField(
+        blank=True,
+        null=True
+    )  # Make dealer_id optional
     name = models.CharField(max_length=100)  # Name of the car model
     CAR_TYPES = [
         ('SEDAN', 'Sedan'),
@@ -35,10 +44,14 @@ class CarModel(models.Model):
         ('COUPE', 'Coupe'),
         ('HATCHBACK', 'Hatchback'),
     ]  # Choices for car type
-    type = models.CharField(max_length=10, choices=CAR_TYPES, default='SUV')  # Car type with limited choices
+    type = models.CharField(
+        max_length=10,
+        choices=CAR_TYPES,
+        default='SUV'
+    )  # Car type with limited choices
     year = models.IntegerField(
         validators=[
-            MaxValueValidator(2023),  # Ensure the year is within the range specified in the data
+            MaxValueValidator(2023),  # Ensure the year is within the range
             MinValueValidator(2015)
         ]
     )  # Year field with validation
@@ -54,4 +67,7 @@ class CarModel(models.Model):
     )  # Optional: Type of fuel the car uses
 
     def __str__(self):
-        return f"{self.car_make.name} {self.name} ({self.type}, {self.year})"  # String representation
+        return (
+            f"{self.car_make.name} {self.name} "
+            f"({self.type}, {self.year})"
+        )  # String representation

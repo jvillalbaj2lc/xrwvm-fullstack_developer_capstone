@@ -6,7 +6,6 @@ import logging
 import json
 from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate
-
 from .models import CarMake, CarModel
 from .restapis import get_request, analyze_review_sentiments, post_review
 
@@ -50,7 +49,7 @@ def registration(request):
         User.objects.get(username=username)
         return JsonResponse(
             {"userName": username, "error": "Already Registered"}
-            )
+        )
     except User.DoesNotExist:
         user = User.objects.create_user(
             username=username,
@@ -69,8 +68,9 @@ def get_cars(request):
         initiate()
     car_models = CarModel.objects.select_related("car_make")
     cars = [
-        {"CarModel": cm.name, "CarMake": cm.car_make.name} for cm in car_models
-        ]
+        {"CarModel": cm.name, "CarMake": cm.car_make.name}
+        for cm in car_models
+    ]
     return JsonResponse({"CarModels": cars})
 
 
@@ -113,5 +113,5 @@ def add_review(request):
             logger.error(f"Error posting review: {e}")
             return JsonResponse(
                 {"status": 401, "message": "Error in posting review"}
-                )
+            )
     return JsonResponse({"status": 403, "message": "Unauthorized"})

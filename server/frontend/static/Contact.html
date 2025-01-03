@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <style>
+    .banner {
+      text-align: center;
+      margin: auto;
+      width: 100%;
+    }
+
+    .banner img {
+      width: 70%;
+      height: auto;
+    }
+
+    .content {
+      width: 80%;
+      margin: auto;
+      margin-top: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .car-image {
+      width: 30%;
+      max-width: 200px;
+      height: auto;
+      border-radius: 10px;
+      margin-right: 20px;
+    }
+
+    .info {
+      text-align: left;
+      font-size: 1rem;
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .info p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: darkturquoise; height: 1in;">
+    <div class="container-fluid">
+      <h2 style="padding-right: 5%;">Dealerships</h2>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: larger;" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: larger;" href="/about">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" style="font-size: larger;" href="/contact">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="banner">
+    <img src="/static/sm-logo.jpg" alt="Banner Image">
+  </div>
+
+  <div class="content">
+    <img src="/static/contactus.png" alt="Contact Icon" class="car-image">
+    <div class="info">
+      <p>Contact Customer Service: <strong>support@bestcars.com</strong></p>
+      <p>Contact our National Advertising Team: <strong>NationalSales@bestcars.com</strong></p>
+      <p>Contact our Public Relations Team: <strong>PR@bestcars.com</strong></p>
+      <p>Contact the BestCars.com Offices: <strong>312-011-1111</strong></p>
+      <p>Become a BestCars.com Car Dealer: <strong>Visit growwithbestcars.com</strong></p>
+    </div>
+  </div>
+</body>
+</html>

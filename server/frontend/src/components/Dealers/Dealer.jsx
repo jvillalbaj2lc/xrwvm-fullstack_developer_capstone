@@ -31,8 +31,7 @@ const Dealer = () => {
     const retobj = await res.json();
     
     if(retobj.status === 200) {
-      let dealerobjs = Array.from(retobj.dealer)
-      setDealer(dealerobjs[0])
+      setDealer(retobj.dealer)
     }
   }
 
@@ -43,6 +42,7 @@ const Dealer = () => {
     const retobj = await res.json();
     
     if(retobj.status === 200) {
+      console.log("reviews",retobj)
       if(retobj.reviews.length > 0){
         setReviews(retobj.reviews)
       } else {
@@ -61,33 +61,52 @@ const Dealer = () => {
     get_reviews();
     if(sessionStorage.getItem("username")) {
       setPostReview(<a href={post_review}><img src={review_icon} style={{width:'10%',marginLeft:'10px',marginTop:'10px'}} alt='Post Review'/></a>)
-
-      
     }
   },[]);  
 
 
-return(
-  <div style={{margin:"20px"}}>
-      <Header/>
-      <div style={{marginTop:"10px"}}>
-      <h1 style={{color:"grey"}}>{dealer.full_name}{postReview}</h1>
-      <h4  style={{color:"grey"}}>{dealer['city']},{dealer['address']}, Zip - {dealer['zip']}, {dealer['state']} </h4>
-      </div>
-      <div class="reviews_panel">
+return (
+  <div style={{ margin: "20px" }}>
+    <Header />
+    <div style={{ marginTop: "10px" }}>
+      {dealer && dealer?.full_name ? (
+        <>
+          <h1 style={{ color: "grey" }}>
+            {dealer.full_name}
+            {postReview}
+          </h1>
+          <h4 style={{ color: "grey" }}>
+            {dealer['city']}, {dealer['address']}, Zip - {dealer['zip']}, {dealer['state']}
+          </h4>
+        </>
+      ) : (
+        <h4 style={{ color: "grey" }}>Loading Dealer Information...</h4>
+      )}
+    </div>
+    <div className="reviews_panel">
       {reviews.length === 0 && unreviewed === false ? (
         <text>Loading Reviews....</text>
-      ):  unreviewed === true? <div>No reviews yet! </div> :
-      reviews.map(review => (
-        <div className='review_panel'>
-          <img src={senti_icon(review.sentiment)} className="emotion_icon" alt='Sentiment'/>
-          <div className='review'>{review.review}</div>
-          <div className="reviewer">{review.name} {review.car_make} {review.car_model} {review.car_year}</div>
-        </div>
-      ))}
-    </div>  
+      ) : unreviewed === true ? (
+        <div>No reviews yet! </div>
+      ) : (
+        reviews.map((review) => (
+          <div className="review_panel" key={review.id}>
+            <img
+              src={senti_icon(review.sentiment)}
+              className="emotion_icon"
+              alt="Sentiment"
+            />
+            <div className="review">{review.review}</div>
+            <div className="reviewer">
+              {review.name} {review.car_make} {review.car_model} {review.car_year}
+            </div>
+          </div>
+        ))
+      )}
+    </div>
   </div>
-)
+);
+
 }
 
 export default Dealer
